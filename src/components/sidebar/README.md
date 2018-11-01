@@ -1,7 +1,3 @@
-# gvt-hero
-
-> GVT UI Components Package
-
 # 构建思路
 
 ## 说明
@@ -52,4 +48,3 @@
   1. 若没有一级菜单, 则移除所有 .gvt-menu-submenu-title 高亮样式组合
   2. 若存在一级菜单, 为当前 .gvt-menu-submenu-title 增加高亮样式组合
   3. 并移除其他 .gvt-menu-submenu-title 的高亮样式组合
-
