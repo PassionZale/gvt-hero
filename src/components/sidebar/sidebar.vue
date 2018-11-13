@@ -160,7 +160,7 @@ body {
               </div>
               <ul class="gvt-menu">
                 <div v-for="(child, c_index) in item.childBisFunction">
-                  <a :href="child.uri" @click="menu_item_click(false, $event)">
+                  <a :href="child.uri" @click.prevent="menu_item_click(false, child.uri, $event)">
                     <li class="gvt-menu-item" :class="{'icon-missing': !item.icon, 'active': isCurrentMenu(child.uri)}">
                       {{ child.name }}
                     </li>
@@ -170,7 +170,7 @@ body {
             </li>
         </div>
         <div v-else>
-          <a :href="item.uri" @click="menu_item_click(true, $event)">
+          <a :href="item.uri" @click.prevent="menu_item_click(true, item.uri, $event)">
             <li class="gvt-menu-item" :class="{'icon-missing': !item.icon, 'active': isCurrentMenu(item.uri)}">
               <hero-icon :name="item.icon" style="margin-right:10px;" v-if="item.icon"></hero-icon>
               {{ item.name }}
@@ -209,14 +209,10 @@ export default {
   directives: {
     "active-submenu": {
       inserted: (el, binding, vnode) => {
-        console.log("==========parse start==========");
-        console.log("一级菜单DOM节点:", el);
         // 检索出二级菜单列表
         const childMenus = el.nextElementSibling;
-        console.log("二级菜单DOM节点:", childMenus);
         // 检索是否包含有 .active 的二级菜单
         const items = childMenus.querySelectorAll(".gvt-menu-item");
-        console.log("二级菜单列表:", items);
         let flag = false;
         items.forEach(item => {
           if (item.classList.contains("active")) {
@@ -224,8 +220,6 @@ export default {
             return;
           }
         });
-        console.log("是否含有 active:", flag);
-        console.log("==========parse end==========");
         // 若存在, 则高亮当前一级菜单
         if (flag) {
           el.className += ` expand active`;
@@ -246,7 +240,7 @@ export default {
   },
 
   methods: {
-    menu_item_click(singleMenu = false, event) {
+    menu_item_click(singleMenu = false, uri = "", event) {
       // 获取当前菜单
       const el = event.target;
       if (singleMenu) {
@@ -280,6 +274,11 @@ export default {
             .querySelector(".gvt-menu-submenu-title")
             .classList.remove("active");
         });
+      }
+
+      if(uri) {
+        const token = localStorage.getItem("GVT_AUTH_TOKEN");
+        window.location.href = token ? `${uri}?token=${token}` : uri;
       }
     },
 

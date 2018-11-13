@@ -43,6 +43,7 @@ export default {
   },
 
   created() {
+    // localStorage.setItem("GVT_AUTH_TOKEN", "afasdfsd-fasdfasd-fasdfas");
     this.fetchMenus();
   },
 
