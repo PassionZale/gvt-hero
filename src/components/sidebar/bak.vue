@@ -1,4 +1,4 @@
-<style lang="less" scoped>
+<style lang="less">
 /*  Start reset css */
 * {
   box-sizing: border-box;
@@ -146,20 +146,21 @@ body {
 <template>
   <div class="gvt-sidebar">
     <div class="gvt-sidebar-logo">
-      <img :src="logo" alt="Logo Image" />
+      <img :src="logo" alt="Logo Image" v-if="logo !== ''" />
+      <p v-else>Logo Image Missing...</p>
     </div>
     <ul class="gvt-menu">
-      <div v-for="(item, p_index) in data">
+      <div v-for="item in data">
         <div v-if="item.childBisFunction && item.childBisFunction.length">
           <li class="gvt-menu-submenu">
-              <div class="gvt-menu-submenu-title" @click="toggleExpand" v-active-submenu>
+              <div class="gvt-menu-submenu-title" @click="toggleExpand" :class="{'active expand': isCurrentMenu(item.uri)}">
                 <hero-icon :name="item.icon" style="margin-right:10px;" v-if="item.icon"></hero-icon>
                 {{ item.name }}
                 <i class="gvt-submenu-arrow"></i>
               </div>
               <ul class="gvt-menu">
-                <div v-for="(child, c_index) in item.childBisFunction">
-                  <a :href="child.uri" @click.prevent="menu_item_click(false, child.uri, $event)">
+                <div v-for="child in item.childBisFunction">
+                  <a :href="child.uri">
                     <li class="gvt-menu-item" :class="{'icon-missing': !item.icon, 'active': isCurrentMenu(child.uri)}">
                       {{ child.name }}
                     </li>
@@ -169,7 +170,7 @@ body {
             </li>
         </div>
         <div v-else>
-          <a :href="item.uri" @click.prevent="menu_item_click(true, item.uri, $event)">
+          <a :href="item.uri">
             <li class="gvt-menu-item" :class="{'icon-missing': !item.icon, 'active': isCurrentMenu(item.uri)}">
               <hero-icon :name="item.icon" style="margin-right:10px;" v-if="item.icon"></hero-icon>
               {{ item.name }}
@@ -190,7 +191,7 @@ export default {
     // 侧边栏 LOGO
     logo: {
       type: String,
-      default: "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjQCAANGMAAAR2Ug-7l4909.png"
+      default: ""
     },
     // 侧边栏 DATA
     data: {
@@ -205,28 +206,6 @@ export default {
     };
   },
 
-  directives: {
-    "active-submenu": {
-      inserted: (el, binding, vnode) => {
-        // 检索出二级菜单列表
-        const childMenus = el.nextElementSibling;
-        // 检索是否包含有 .active 的二级菜单
-        const items = childMenus.querySelectorAll(".gvt-menu-item");
-        let flag = false;
-        items.forEach(item => {
-          if (item.classList.contains("active")) {
-            flag = true;
-            return;
-          }
-        });
-        // 若存在, 则高亮当前一级菜单
-        if (flag) {
-          el.className += ` expand active`;
-        }
-      }
-    }
-  },
-
   mounted() {
     this.$nextTick(() => {
       this._initHref();
@@ -239,48 +218,6 @@ export default {
   },
 
   methods: {
-    menu_item_click(singleMenu = false, uri = "", event) {
-      // 获取当前菜单
-      const el = event.target;
-      if (singleMenu) {
-        let nodes = document.querySelectorAll(
-          ".gvt-sidebar .gvt-menu-submenu-title"
-        );
-        nodes.forEach(node => {
-          node.classList.remove("expand");
-          node.classList.remove("active");
-        });
-      } else {
-        // 获取当前父级节点
-        const parentMenu = this.findParentBySelector(el, ".gvt-menu-submenu");
-        // 获取一级菜单
-        const menu = parentMenu.querySelector(".gvt-menu-submenu-title");
-        // 高亮一级菜单
-        if (!menu.classList.contains("expand")) menu.className += " expand";
-        if (!menu.classList.contains("active")) menu.className += " active";
-        // 移除其他一级菜单样式
-        const arrs = document.querySelectorAll(
-          ".gvt-sidebar .gvt-menu-submenu"
-        );
-        const brothers = Array.prototype.filter.call(arrs, function(node) {
-          return node !== parentMenu;
-        });
-        brothers.map(node => {
-          node
-            .querySelector(".gvt-menu-submenu-title")
-            .classList.remove("expand");
-          node
-            .querySelector(".gvt-menu-submenu-title")
-            .classList.remove("active");
-        });
-      }
-
-      if(uri) {
-        const token = localStorage.getItem("GVT_AUTH_TOKEN");
-        window.location.href = token ? `${uri}?token=${token}` : uri;
-      }
-    },
-
     _initHref() {
       this.href = window.location.href;
     },
@@ -297,24 +234,6 @@ export default {
       el.classList.contains("expand")
         ? el.classList.remove("expand")
         : (el.className += ` expand`);
-    },
-
-    collectionHas(a, b) {
-      //helper function (see below)
-      for (var i = 0, len = a.length; i < len; i++) {
-        if (a[i] == b) return true;
-      }
-      return false;
-    },
-
-    findParentBySelector(elm, selector) {
-      var all = document.querySelectorAll(selector);
-      var cur = elm.parentNode;
-      while (cur && !this.collectionHas(all, cur)) {
-        //keep going up until you find a match
-        cur = cur.parentNode; //go up
-      }
-      return cur; //will return null if not found
     }
   }
 };

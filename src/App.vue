@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <hero-layout :menu-data="menuData" :hash="hash" logo="/static/images/logo.png">
+    <hero-layout :menu-data="menuData">
 
       <template slot="header">
         Header Container
