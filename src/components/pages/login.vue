@@ -35,6 +35,7 @@
   .gvt-login-title {
     font-size: 18px;
     text-align: center;
+    margin: 0;
   }
 }
 
@@ -50,8 +51,8 @@
     border: 1px solid #cccccc;
     height: 36px;
     border-radius: 4px;
-    padding: 6px;
     width: 100%;
+    padding: 0 6px;
   }
   button {
     width: 100%;
@@ -89,12 +90,12 @@
       <div class="gvt-form-item">
         <label>用户名</label>
         <br>
-        <input type="text" v-model="form.username"></input>
+        <input type="text" v-model="form.username" @keyup.enter="submit" />
       </div>
       <div class="gvt-form-item">
         <label>密码</label>
         <br>
-        <input type="password" v-model="form.password"></input>
+        <input type="password" v-model="form.password" @keyup.enter="submit" />
       </div>
       <div class="gvt-form-item">
         <button type="button" @click="submit">登录</button>
