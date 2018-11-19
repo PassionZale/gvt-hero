@@ -1,1 +1,16 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1539050336856" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3161" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M262.7 181.7c-25.4 0-46.1 20.6-46.1 46.1v583.5c0 25.4 20.6 46.1 46.1 46.1s46.1-20.6 46.1-46.1V227.8c-0.1-25.5-20.7-46.1-46.1-46.1z m245.6 0c-25.4 0-46.1 20.6-46.1 46.1v583.5c0 25.4 20.6 46.1 46.1 46.1 25.4 0 46.1-20.6 46.1-46.1V227.8c0-25.5-20.6-46.1-46.1-46.1z m245.7 0c-25.4 0-46.1 20.6-46.1 46.1v583.5c0 25.4 20.6 46.1 46.1 46.1s46.1-20.6 46.1-46.1V227.8c0-25.5-20.7-46.1-46.1-46.1z" p-id="3162"></path></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;}
+</style>
+<g>
+	<g>
+		<path class="st0" d="M262.7,181.7c-25.4,0-46.1,20.6-46.1,46.1v583.5c0,25.4,20.6,46.1,46.1,46.1s46.1-20.6,46.1-46.1V227.8
+			C308.7,202.3,288.1,181.7,262.7,181.7z M508.3,181.7c-25.4,0-46.1,20.6-46.1,46.1v583.5c0,25.4,20.6,46.1,46.1,46.1
+			c25.4,0,46.1-20.6,46.1-46.1V227.8C554.4,202.3,533.8,181.7,508.3,181.7z M754,181.7c-25.4,0-46.1,20.6-46.1,46.1v583.5
+			c0,25.4,20.6,46.1,46.1,46.1s46.1-20.6,46.1-46.1V227.8C800.1,202.3,779.4,181.7,754,181.7z"/>
+	</g>
+</g>
+</svg>

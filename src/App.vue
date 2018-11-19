@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <!-- <hero-layout :menu-data="menuData">
+    <hero-layout :menu-data="menuData">
 
       <template slot="header">
         Header Container
@@ -25,9 +25,7 @@
         </div>
       </template>
       
-    </hero-layout> -->
-
-    <hero-login></hero-login>
+    </hero-layout>
 
   </div>
 </template>
