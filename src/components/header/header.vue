@@ -39,7 +39,7 @@
 
     .tool-timezone {
       color: #a7a7a7;
-      margin-right: 20px;
+      margin-right: 10px;
     }
 
     .tool-groups {
