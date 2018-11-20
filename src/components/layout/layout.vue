@@ -2,14 +2,12 @@
 
   <div>
 
-    <gvt-header :data="breads" :routers="routeMatched"></gvt-header>
+    <gvt-header :sidebars="sidebars" :routers="routers"></gvt-header>
 
     <gvt-sidebar
       :data="menus" 
       :logo="logo" 
-      @init-parent-menu="initParentMenu"
-      @init-child-menu="initChildMenu"
-      @menu-click="menuClick">
+      @menu-change="menuChange">
     </gvt-sidebar>
 
     <gvt-content>
@@ -41,13 +39,20 @@ export default {
 
     routeMatched: {
       type: Array,
-      default: () => ([])
+      default: () => []
     }
   },
 
   data() {
     return {
-      breads: []
+      sidebars: [],
+      routers: [],
+    };
+  },
+
+  watch: {
+    routeMatched(val) {
+      this.routers = val;
     }
   },
 
@@ -57,23 +62,44 @@ export default {
     }
   },
 
+  created() {
+    this.routers = this.routeMatched;
+  },
+
   methods: {
-    initParentMenu(e) {
-      // 将父菜单添加至数组首位
-      this.breads.unshift(Object.assign({}, e));
+    menuChange() {
+      this.$nextTick(() => {
+        this.sidebars = [];
+        let arr = [];
+        const el = document.querySelector(".gvt-menu-item.active");
+        const aNode = this.findParentBySelector(el, "a");
+        const parentNode = this.findParentBySelector(el, ".gvt-menu-submenu");
+        if (parentNode) {
+          const parentMenu = parentNode.querySelector(".gvt-menu-submenu-title");
+          arr = [
+            { name: parentMenu.innerText.trim() },
+            { name: el.innerText.trim(), uri: aNode.getAttribute("href").trim() }
+          ];
+        } else {
+          arr = [{ name: el.innerText.trim(), uri: aNode.getAttribute("href").trim() }]
+        }
+        this.sidebars = arr;
+      });
     },
-    initChildMenu(e) { 
-      this.breads.push(Object.assign({}, e));
+    collectionHas(a, b) {
+      for (var i = 0, len = a.length; i < len; i++) {
+        if (a[i] == b) return true;
+      }
+      return false;
     },
-    menuClick(e) {
-      console.log("===== MENU CLICK ======");
-      console.log(this.breads);
-      console.log("menu-click");
-      console.log(e);
-      this.breads = e.map(item => Object.assign({}, item));
-      console.log("after-menu-click")
-      console.log(this.breads);
-    },
+    findParentBySelector(elm, selector) {
+      var all = document.querySelectorAll(selector);
+      var cur = elm.parentNode;
+      while (cur && !this.collectionHas(all, cur)) {
+        cur = cur.parentNode;
+      }
+      return cur;
+    }
   }
 };
 </script>

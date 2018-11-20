@@ -1,5 +1,13 @@
 import Layout from "../views/common/layouts.vue"
 import Container from "../views/common/container.vue"
+import manageList from "../views/product/manage/List.vue"
+import manageEdit from "../views/product/manage/Edit.vue"
+import manageCreate from "../views/product/manage/Create.vue"
+
+import brandList from "../views/product/brand/List.vue"
+import brandEdit from "../views/product/brand/Edit.vue"
+import brandCreate from "../views/product/brand/Create.vue"
+
 
 const productRoutes =   {
   path: "/product",
@@ -18,20 +26,20 @@ const productRoutes =   {
         {
           path: "list",
           name: "product-manage-list",
-          component: import("../views/product/manage/List.vue").default,
+          component: manageList,
           meta: { title: "商品列表" }
-        },
-        {
-          path: "create",
-          name: "product-manage-create",
-          component: import("../views/product/manage/Create.vue").default,
-          meta: { title: "商品创建" }
         },
         {
           path: "edit",
           name: "product-manage-edit",
-          component: import("../views/product/manage/Edit.vue").default,
+          component: manageEdit,
           meta: { title: "商品编辑" }
+        },
+        {
+          path: "create",
+          name: "product-manage-create",
+          component: manageCreate,
+          meta: { title: "商品创建" }
         },
       ]
     },
@@ -46,19 +54,19 @@ const productRoutes =   {
         {
           path: "list",
           name: "product-brand-list",
-          component: import("../views/product/brand/List.vue").default,
+          component: brandList,
           meta: { title: "品牌列表" }
         },
         {
           path: "create",
           name: "product-brand-create",
-          component: import("../views/product/brand/Create.vue").default,
+          component: brandCreate,
           meta: { title: "品牌创建" }
         },
         {
           path: "edit",
           name: "product-brand-edit",
-          component: import("../views/product/brand/Edit.vue").default,
+          component: brandEdit,
           meta: { title: "品牌编辑" }
         },
       ]

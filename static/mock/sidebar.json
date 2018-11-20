@@ -1,6 +1,6 @@
 [
   {
-    "name": "控制台",
+    "name": "首页",
     "uri": "http://localhost:8081/#/console",
     "icon": "icon-mywork"
   },

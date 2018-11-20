@@ -1,5 +1,5 @@
 <template>
-  <hero-layout :menu-data="menuData" :route-matched="routes">
+  <hero-layout :menu-data="menuData" :route-matched="routeMatched">
 
     <div slot="content">
       <router-view></router-view>
@@ -13,12 +13,19 @@ export default {
   data() {
     return {
       menuData: [],
-      routes: []
+      routeMatched: []
     };
+  },
+
+  watch: {
+    $route() {
+      this.routeMatched = this.$route.matched;
+    }
   },
 
   created() {
     this.fetchMenus();
+    this.routeMatched = this.$route.matched;
   },
 
   methods: {

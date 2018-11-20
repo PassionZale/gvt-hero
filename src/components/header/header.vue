@@ -105,53 +105,31 @@ export default {
   name: "hero-header",
 
   props: {
-    data: { type: Array, default: () => [] },
+    sidebars: { type: Array, default: () => [] },
     routers: { type: Array, default: () => [] }
-  },
-
-  data() {
-    return {
-      copy_data: [],
-      copy_routers: [],
-    }
-  },
-
-  watch: {
-    data(val) {
-      this.copy_data = val.map(item => item);
-    },
-    routers(val) {
-      this.copy_routers = val.map(item => item);
-    }
   },
 
   computed: {
     breads() {
       let breads = [];
-      const length = this.copy_data.length;
+      const length = this.sidebars.length;
+      breads = this.sidebars.map(item => item);
       if (length === 1) {
-        breads = this.copy_data;
-        this.copy_routers.map((item, index) => {
-          if (index >= 1) {
-            breads.push({ name: item.meta.title, uri: item.path });
+        this.routers.map((item, index) => {
+          if (index > 0) {
+            breads.push({ name: item.meta.title, uri: `/#${item.path}` });
           }
         });
-      } else if (length >= 2) {
-        breads = this.copy_data;
-        this.copy_routers.map((item, index) => {
-          if (index >= 2) {
-            breads.push({ name: item.meta.title, uri: item.path });
+      } else if (length > 1) {
+        this.routers.map((item, index) => {
+          if (index > 1) {
+            breads.push({ name: item.meta.title, uri: `/#${item.path}` });
           }
         });
       }
 
       return breads;
     }
-  },
-
-  created() {
-    this.copy_data = this.data.map(item => item);
-    this.copy_routers = this.copy_routers.map(item => item);
   }
 };
 </script>
