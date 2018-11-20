@@ -2,7 +2,12 @@
 
   <div>
 
-    <gvt-header :sidebars="sidebars" :routers="routers"></gvt-header>
+    <gvt-header 
+      :sidebars="sidebars" 
+      :routers="routers"
+      :username="username"
+      @user-menu-click="userMenuClick">
+    </gvt-header>
 
     <gvt-sidebar
       :data="menus" 
@@ -47,6 +52,7 @@ export default {
     return {
       sidebars: [],
       routers: [],
+      username: "Gvt Hero"
     };
   },
 
@@ -99,6 +105,18 @@ export default {
         cur = cur.parentNode;
       }
       return cur;
+    },
+    userMenuClick(param) {
+      switch(param) {
+        case "user-info":
+          this.$emit("user-info-click");
+          break;
+        case "mod-pwd":
+          this.$emit("user-pwd-click");
+          break;
+        default:
+          this.$emit("user-logout-click");
+      }
     }
   }
 };

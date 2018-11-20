@@ -25,5 +25,7 @@ export default {
   install,
   HeroHeader,
   HeroSidebar,
-  HeroContent
+  HeroContent,
+  HeroLayout,
+  HeroLogin
 }
