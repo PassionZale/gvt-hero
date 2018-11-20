@@ -33,9 +33,9 @@ export default {
   components: { GvtHeader, GvtSidebar, GvtContent },
 
   props: {
-    logo: {
-      type: String
-    },
+    logo: [String],
+
+    username: [String],
 
     menuData: {
       type: Array,
@@ -51,8 +51,7 @@ export default {
   data() {
     return {
       sidebars: [],
-      routers: [],
-      username: "Gvt Hero"
+      routers: []
     };
   },
 

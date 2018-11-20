@@ -17,15 +17,18 @@ npm update gvt-hero
 
 ## 组件列表
 
-- hero-icon
+- hero-layout  布局组件
 
-- hero-sidebar
+- hero-icon    图标组件
 
-- hero-header
+- hero-login   登录视图组件
 
-- hero-content
+- hero-sidebar **请勿单独使用**
 
-- hero-layout
+- hero-header  **请勿单独使用**
+
+- hero-content **请勿单独使用**
+
 
 ## 引用方式
 
@@ -44,207 +47,118 @@ Vue.use(HeroUI)
 <script src="./node_modules/gvt-hero/dist/gvt-hero.js"></script>
 ```
 
-## 构建布局容器
+## hero-layout
+
+### props
+
+props | 说明 | 数据类型 | 示例
+- | - | - | - |
+username | 用户名称  | String | "Gvt Hero"
+menu-data | 侧边栏菜单数据  | Array | []
+route-matched | vue-router 匹配集合 | Array | []
+
+### events
+
+events | 说明 |
+- | - | - | - |
+user-info-click | 用户信息点击  
+user-pwd-click | 修改密码点击
+user-logout-click | 注销按钮点击
+
+
+```shell
+# hero-layout 集成了 hero-header, hero-sidebar, hero-content
+# 使用 hero-layout, 快速构建子系统的布局容器
+# 你也可以参照 ./src/views/common/layouts.vue
+# 以下示例是标准使用方法
+touch layouts.vue
+```
 
 ```html
 <template>
-  <hero-layout :menu-data="menuData" logo="/static/images/logo.png">
-    <template slot="header">
-      <!-- 自定义 header slot -->
-    </template>
-    <template slot="content">
-      <!-- 自定义 content slot -->
-      <!-- 此处通常用来放置 router-view -->
+  <hero-layout 
+    :username="username" 
+    :menu-data="menuData" 
+    :route-matched="routeMatched"
+    @user-info-click="userinfo"
+    @user-pwd-click="userpwd"
+    @user-logout-click="userlogout">
+
+    <div slot="content">
       <router-view></router-view>
-    </template>
+    </div>
+
   </hero-layout>
 </template>
 ```
 
 ```javascript
-<script>
 export default {
-  name: "layouts",
-
   data() {
     return {
-      menuData: []
+      menuData: [],
+      routeMatched: [],
+      username: "Gvt Hero"
     };
   },
 
-  // 由于 gvt-sidebar 一级菜单高亮, 使用了 v-directive
-  // 且高亮操作在 inserted 钩子中实现, 因此:
-  // 请一定在 mounted() 中, $nextTick() 回调函数中 为 menuData 进行赋值
+  watch: {
+    $route() {
+      this.routeMatched = this.$route.matched;
+    }
+  },
+
+  created() {
+    this.routeMatched = this.$route.matched;
+  },
+
   mounted() {
     this.$nextTick(() => {
-      this.menuData = this.gvtMenu();
+      this.fetchMenus();
     })
   },
 
   methods: {
-
-    gvtMenu() {
-      const domain = "http://localhost:8080/#/";
-      return [
-        {
-          name: "控制台",
-          uri: `${domain}console`,
-          icon: "icon-mywork"
-        },
-        {
-          name: "商品管理",
-          uri: `${domain}product`,
-          icon: "icon-cargo",
-          childBisFunction: [
-            {
-              name: "商品管理",
-              uri: `${domain}product/manage`
-            },
-            {
-              name: "商品分类",
-              uri: `${domain}product/category`
-            },
-            {
-              name: "商品属性",
-              uri: `${domain}product/attribute`
-            },
-            {
-              name: "税务管理",
-              uri: `${domain}product/tax`
-            },
-            {
-              name: "品牌管理",
-              uri: `${domain}product/brand`
-            },
-            {
-              name: "商品审核",
-              uri: `${domain}product/verify`
-            }
-          ]
-        },
-        {
-          name: "备案信息",
-          uri: `${domain}filing`,
-          icon: "icon-mywork",
-          childBisFunction: [
-            {
-              name: "备案口岸",
-              uri: `${domain}filing/filingPort`
-            },
-            {
-              name: "备案税则",
-              uri: `${domain}filing/filingTax`
-            },
-            {
-              name: "口岸备案商品",
-              uri: `${domain}filing/portProdct`
-            },
-            {
-              name: "物流备案商品",
-              uri: `${domain}filing/Logistics`
-            }
-          ]
-        }
-      ];
+    // 拉取菜单模拟数据
+    fetchMenus() {
+      fetch("/static/mock/sidebar.json")
+        .then(response => {
+          return response.json();
+        })
+        .then(menu => {
+          setTimeout(() => {
+            this.menuData = menu;
+          }, 500);
+        });
+    },
+    userinfo() {
+      alert("userinfo");
+    },
+    userpwd() {
+      alert("userpwd");
+    },
+    userlogout() {
+      alert("userlogout");
     }
-
   }
 };
-</script>
 ```
 
-# 构建思路
+## hero-icon
 
-## 说明
+集成了```vue-svgicon```, 请查看 **[vue-svgicon 相关文档](https://github.com/MMF-FE/vue-svgicon)**
 
-- 子菜单: 即二级菜单和没有一级菜单的菜单(如: 控制台)
+## hero-login
 
-- 一级菜单: 即含有二级菜单的菜单
-
-- 高亮样式组合: .active .expand
-
-## DOM 结构
+```shell
+# 子系统创建视图组件, 再使用 hero-login, 即可快速构建登录视图
+touch Login.vue
+```
 
 ```html
-<ul class="gvt-menu">
-  <!-- 通过 .active 控制高亮样式 -->
-  <li class="gvt-menu-item active">控制台</li>
-
-  <li class="gvt-menu-submenu">
-    <!-- 通过 .active 控制高亮样式 -->
-    <!-- 通过 .expand 控制展开样式 -->
-    <div class="gvt-menu-submenu-title expand active">一级菜单标题</div>
-    <ul class="gvt-menu">
-      <!-- 通过 .active 控制高亮样式 -->
-       <li class="gvt-menu-item active">二级菜单标题</li>
-    </ul>
-  </li>
-</ul>
-```
-
-## F5 刷新
-
-- 高亮子菜单
-
-  0. 通过监听 ```window``` 的 ```hashchange``` 事件, 动态匹配: 菜单模型中的 `uri` 字段与当前 `window.location.href` 是否满足 ```isCurrentMenu()``` 函数校验
-
-  1. isCurrentMenu() 会依据 uri 动态创建 new RegExp(`^(${uri})`) 正则
-
-  2. 在 template 中, 通过正则 test() 所返回的 true OR false, 动态高亮菜单样式
-
-  3. :class="{'icon-missing': !item.icon, 'active': isCurrentMenu(child.uri)}"
-
-- 高亮一级菜单
-
-  0. 编写 v-active-submenu 指令, 并为每个一级菜单绑定该指定: <div class="gvt-menu-submenu-title" @click="toggleExpand" v-active-submenu>
-
-  1. 在 inserted 钩子函数中, 检索出二级菜单列表 DOM NODE: 通过 
-  .gvt-menu-submenu-title 找到临近的兄弟节点 .gvt-menu
-
-  2. .gvt-menu 中找到是否有 .gvt-menu-item.active 节点
-
-  3. 若其存在, 则为当前一级菜单增加高亮样式组合
-
-## 路由切换
-
-- 子菜单点击
-
-  0. 为每个子菜单绑定点击事件 menu_item_click()
-
-  1. 若没有一级菜单, 则移除所有 .gvt-menu-submenu-title 高亮样式组合
-
-  2. 若存在一级菜单, 为当前 .gvt-menu-submenu-title 增加高亮样式组合
-
-  3. 并移除其他 .gvt-menu-submenu-title 的高亮样式组合
-
-
-# 面包屑导航
-
-## props
-
-routeMatched: Array
-
-```html
-<hero-layout 
-  :menu-data="menuData" 
-  :route-matched="routes">
-</hero-layout>
-```
-
-```javascript
-export default {
-  data() {
-    return {
-      routers: this.$route.matched
-    }
-  }
-}
-```
-
-# 登录视图组件
-
-```html
-<hero-login @login="submit"></hero-login>
+<template>
+  <hero-login @login="submit"></hero-login>
+</template>
 ```
 
 ```javascript

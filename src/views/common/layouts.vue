@@ -1,5 +1,6 @@
 <template>
   <hero-layout 
+    :username="username" 
     :menu-data="menuData" 
     :route-matched="routeMatched"
     @user-info-click="userinfo"
@@ -18,7 +19,8 @@ export default {
   data() {
     return {
       menuData: [],
-      routeMatched: []
+      routeMatched: [],
+      username: "Gvt Hero"
     };
   },
 
