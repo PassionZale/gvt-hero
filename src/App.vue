@@ -1,29 +1,37 @@
+<style lang="less">
+/*  Start reset css */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #f0f2f5;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+
 <template>
   <div id="app">
 
-    <hero-layout :menu-data="menuData">
+    <hero-layout :menu-data="menuData" :route-matched="routes">
 
-      <template slot="header">
-        Header Container
-      </template>
-
-      <template slot="content">
-        <h2>当前选中: {{ active_menu || "暂无" }}</h2>
-        <h2>当前模拟: {{ hash || "暂无" }}</h2>
-        <div v-for="item in menuData">
-          <template v-if="item.childBisFunction && item.childBisFunction.length">
-            <button>{{ item.name }}</button>
-            <br>
-            <br>
-            <button v-for="v in item.childBisFunction" @click="clickMenu(v.uri)">{{ v.name }}</button>
-            <hr>
-          </template>
-          <template v-else>
-            <button @click="clickMenu(item.uri)">{{ item.name }}</button>
-            <hr>
-          </template>
-        </div>
-      </template>
+      <template slot="content"></template>
       
     </hero-layout>
 
@@ -37,43 +45,15 @@ export default {
   data() {
     return {
       menuData: [],
-      active_menu: "",
-      hash: "/#/product/verify/list"
+      routes: this.mockRoutes()
     };
   },
 
   created() {
-    // localStorage.setItem("GVT_AUTH_TOKEN", "afasdfsd-fasdfasd-fasdfas");
     this.fetchMenus();
   },
 
-  mounted() {
-    this.initActive();
-  },
-
-  watch: {
-    hash() {
-      this.initActive();
-    }
-  },
-
   methods: {
-    initActive() {
-      const hash = this.hash;
-      if (hash) {
-        const current = this.active_menu;
-        const reg = new RegExp(`^(${current})`);
-        const valid = reg.test(hash);
-      }
-    },
-
-    clickMenu(uri) {
-      this.active_menu = uri;
-      const list = ["list", "detail", "edit"];
-      const str = list[this.rnd(0, list.length - 1)];
-      this.hash = this.active_menu ? `${this.active_menu}/${str}` : "";
-    },
-
     // 拉取菜单模拟数据
     fetchMenus() {
       fetch("/static/mock/sidebar.json")
@@ -83,6 +63,19 @@ export default {
         .then(menu => {
           this.menuData = menu;
         });
+    },
+
+    mockRoutes() {
+      // return [
+      //   { meta: {title: "首页"}, path: "" },
+      //   { meta: {title: "我的工作台"}, path: "/console" }
+      // ];
+
+      return [
+        { meta: {title: "商品管理"}, path: "/product" },
+        { meta: {title: "商品分类"}, path: "/product/category" },
+        { meta: {title: "分类列表"}, path: "/product/category/list" },
+      ];
     },
 
     // 随机整数

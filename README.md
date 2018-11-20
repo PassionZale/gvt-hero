@@ -216,3 +216,57 @@ export default {
   2. 若存在一级菜单, 为当前 .gvt-menu-submenu-title 增加高亮样式组合
 
   3. 并移除其他 .gvt-menu-submenu-title 的高亮样式组合
+
+
+# 面包屑导航
+
+## props
+
+routeMatched: Array
+
+```html
+<hero-layout 
+  :menu-data="menuData" 
+  :route-matched="routes">
+</hero-layout>
+```
+
+```javascript
+export default {
+  data() {
+    return {
+      routers: this.$route.matched
+    }
+  }
+}
+```
+
+# 登录视图组件
+
+```html
+<hero-login @login="submit"></hero-login>
+```
+
+```javascript
+export default {
+  methods: {
+    submit(user) {
+      // user: {username: "", password: ""}
+      // 你需要自行 md5 password
+      // 例如:
+      // const params = Object.assign({}, user, {
+      //   password: md5(user.password)
+      // });
+      // login(params)
+      //   .then(response => {
+      //     const jwt = response.data.token;
+      //     Auth.setToken(jwt);
+      //     this.$router.push("/");
+      //   })
+      //   .catch(error => {
+      //     this.$Message.error("账户或密码错误");
+      //   });
+    }
+  }
+}
+```
