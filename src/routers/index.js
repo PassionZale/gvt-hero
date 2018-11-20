@@ -10,15 +10,12 @@ const routerMap = [
     path: "/",
     name: "root",
     component: Layout,
-    redirect: {
-      name: "console"
-    },
-    meta: {
-      title: "首页"
-    },
+    redirect: { name: "console" },
+    meta: { title: "首页" },
     children: [{
       path: "console",
       name: "console",
+      component: import("../views/console/Index.vue").default,
       meta: {
         title: "我的工作台",
         icon: "icon-mywork",

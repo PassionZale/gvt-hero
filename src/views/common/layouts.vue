@@ -1,9 +1,9 @@
 <template>
   <hero-layout :menu-data="menuData" :route-matched="routes">
 
-    <template slot="content">
+    <div slot="content">
       <router-view></router-view>
-    </template>
+    </div>
 
   </hero-layout>
 </template>
