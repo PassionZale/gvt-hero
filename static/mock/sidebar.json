@@ -5,7 +5,7 @@
     "icon": "icon-mywork"
   },
   {
-    "name": "商品管理",
+    "name": "商品综合",
     "uri": "http://localhost:8081/#/product",
     "icon": "icon-cargo",
     "childBisFunction": [{
@@ -13,46 +13,8 @@
         "uri": "http://localhost:8081/#/product/manage"
       },
       {
-        "name": "商品分类",
-        "uri": "http://localhost:8081/#/product/category"
-      },
-      {
-        "name": "商品属性",
-        "uri": "http://localhost:8081/#/product/attribute"
-      },
-      {
-        "name": "税务管理",
-        "uri": "http://localhost:8081/#/product/tax"
-      },
-      {
         "name": "品牌管理",
         "uri": "http://localhost:8081/#/product/brand"
-      },
-      {
-        "name": "商品审核",
-        "uri": "http://localhost:8081/#/product/verify"
-      }
-    ]
-  },
-  {
-    "name": "备案信息",
-    "uri": "http://localhost:8081/#/filing",
-    "icon": "icon-mywork",
-    "childBisFunction": [{
-        "name": "备案口岸",
-        "uri": "http://localhost:8081/#/filing/A"
-      },
-      {
-        "name": "备案税则",
-        "uri": "http://localhost:8081/#/filing/B"
-      },
-      {
-        "name": "口案备案商品",
-        "uri": "http://localhost:8081/#/filing/C"
-      },
-      {
-        "name": "物流备案商品",
-        "uri": "http://localhost:8081/#/filing/D"
       }
     ]
   }

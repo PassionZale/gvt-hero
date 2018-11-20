@@ -1,5 +1,4 @@
 <style lang="less">
-/*  Start reset css */
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -28,60 +27,12 @@ body {
 
 <template>
   <div id="app">
-
-    <hero-layout :menu-data="menuData" :route-matched="routes">
-
-      <template slot="content"></template>
-      
-    </hero-layout>
-
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
   name: "app",
-
-  data() {
-    return {
-      menuData: [],
-      routes: this.mockRoutes()
-    };
-  },
-
-  created() {
-    this.fetchMenus();
-  },
-
-  methods: {
-    // 拉取菜单模拟数据
-    fetchMenus() {
-      fetch("/static/mock/sidebar.json")
-        .then(response => {
-          return response.json();
-        })
-        .then(menu => {
-          this.menuData = menu;
-        });
-    },
-
-    mockRoutes() {
-      // return [
-      //   { meta: {title: "首页"}, path: "" },
-      //   { meta: {title: "我的工作台"}, path: "/console" }
-      // ];
-
-      return [
-        { meta: {title: "商品管理"}, path: "/product" },
-        { meta: {title: "商品分类"}, path: "/product/category" },
-        { meta: {title: "分类列表"}, path: "/product/category/list" },
-      ];
-    },
-
-    // 随机整数
-    rnd(start, end) {
-      return Math.floor(Math.random() * (end - start) + start);
-    }
-  }
 };
 </script>

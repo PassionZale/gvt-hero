@@ -109,20 +109,36 @@ export default {
     routers: { type: Array, default: () => [] }
   },
 
+  data() {
+    return {
+      copy_data: [],
+      copy_routers: [],
+    }
+  },
+
+  watch: {
+    data(val) {
+      this.copy_data = val.map(item => item);
+    },
+    routers(val) {
+      this.copy_routers = val.map(item => item);
+    }
+  },
+
   computed: {
     breads() {
       let breads = [];
-      const length = this.data.length;
+      const length = this.copy_data.length;
       if (length === 1) {
-        breads = this.data;
-        this.routers.map((item, index) => {
+        breads = this.copy_data;
+        this.copy_routers.map((item, index) => {
           if (index >= 1) {
             breads.push({ name: item.meta.title, uri: item.path });
           }
         });
       } else if (length >= 2) {
-        breads = this.data;
-        this.routers.map((item, index) => {
+        breads = this.copy_data;
+        this.copy_routers.map((item, index) => {
           if (index >= 2) {
             breads.push({ name: item.meta.title, uri: item.path });
           }
@@ -131,6 +147,11 @@ export default {
 
       return breads;
     }
+  },
+
+  created() {
+    this.copy_data = this.data.map(item => item);
+    this.copy_routers = this.copy_routers.map(item => item);
   }
 };
 </script>

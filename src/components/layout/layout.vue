@@ -65,8 +65,14 @@ export default {
     initChildMenu(e) { 
       this.breads.push(Object.assign({}, e));
     },
-    menuClick(e) { 
-      this.breads = JSON.parse(JSON.stringify(e));
+    menuClick(e) {
+      console.log("===== MENU CLICK ======");
+      console.log(this.breads);
+      console.log("menu-click");
+      console.log(e);
+      this.breads = e.map(item => Object.assign({}, item));
+      console.log("after-menu-click")
+      console.log(this.breads);
     },
   }
 };
