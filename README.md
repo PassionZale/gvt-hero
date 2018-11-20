@@ -52,15 +52,15 @@ Vue.use(HeroUI)
 ### props
 
 props | 说明 | 数据类型 | 示例
-- | - | - | - |
+---- | ---- | ---- | ---- 
 username | 用户名称  | String | "Gvt Hero"
 menu-data | 侧边栏菜单数据  | Array | []
 route-matched | vue-router 匹配集合 | Array | []
 
 ### events
 
-events | 说明 |
-- | - | - | - |
+events | 说明 
+---- | ----
 user-info-click | 用户信息点击  
 user-pwd-click | 修改密码点击
 user-logout-click | 注销按钮点击
