@@ -201,9 +201,11 @@ export default {
     handleUserMenuClose() {
       this.userMenuShow = false;
     },
+
     userMenuClick(param) {
       this.$emit("user-menu-click", param);
     },
+    
     getClientTimezone() {
       const date = new Date();
       const timezone = date.getTimezoneOffset();
