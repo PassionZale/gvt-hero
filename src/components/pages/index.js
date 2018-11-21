@@ -1,3 +1,7 @@
 import HeroLogin from "./login.vue"
+import HeroError from "./error.vue"
 
-export default HeroLogin
+export {
+  HeroLogin,
+  HeroError
+}
