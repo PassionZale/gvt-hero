@@ -1,5 +1,7 @@
 <style lang="less">
 /*  sidebar css */
+
+
 .gvt-sidebar {
   height: 100%;
   width: 220px;
@@ -12,6 +14,17 @@
   font-size: 14px;
   overflow-x: hidden;
   user-select: none;
+
+  &::-webkit-scrollbar {
+    background-color: #eee;
+    overflow: visible;
+    width: 0;
+    height: 0;
+  }
+  &::-webkit-scrollbar-button {
+      height: 0;
+      width: 0;
+  }
 
   .gvt-sidebar-logo {
     height: 70px;

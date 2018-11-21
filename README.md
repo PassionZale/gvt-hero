@@ -1,6 +1,6 @@
 # gvt-hero
 
-> GVT UI Components Package @1.1.23
+> GVT UI Components Package @1.1.24
 
 # 如何使用
 
@@ -71,6 +71,8 @@ user-logout-click | 注销按钮点击
 # 使用 hero-layout, 快速构建子系统的布局容器
 # 你也可以参照 ./src/views/common/layouts.vue
 # 以下示例是标准使用方法
+# 若你的 router.meta.title 未设置或设置的值为空
+# 即 meta.title == false, 则它将不会出现在面包屑中
 touch layouts.vue
 ```
 

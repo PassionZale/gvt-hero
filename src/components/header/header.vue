@@ -160,13 +160,13 @@ export default {
       breads = this.sidebars.map(item => item);
       if (length === 1) {
         this.routers.map((item, index) => {
-          if (index > 0) {
+          if (index > 0 && item.meta.title) {
             breads.push({ name: item.meta.title, uri: `/#${item.path}` });
           }
         });
       } else if (length > 1) {
         this.routers.map((item, index) => {
-          if (index > 1) {
+          if (index > 1 && item.meta.title) {
             breads.push({ name: item.meta.title, uri: `/#${item.path}` });
           }
         });
@@ -205,7 +205,7 @@ export default {
     userMenuClick(param) {
       this.$emit("user-menu-click", param);
     },
-    
+
     getClientTimezone() {
       const date = new Date();
       const timezone = date.getTimezoneOffset();
