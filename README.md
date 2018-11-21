@@ -184,3 +184,22 @@ export default {
   }
 }
 ```
+
+## hero-error
+
+### props
+
+props | 说明 | 数据类型 | 示例
+---- | ---- | ---- | ---- 
+code | 视图代码,默认 "404", 只提供"403","404","500"  | String | "403" 、"404"、"500"
+
+```shell
+# 快速构建错误视图页
+touch 404.vue
+```
+
+```html
+<template>
+  <hero-error></hero-error>
+</template>
+```
