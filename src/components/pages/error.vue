@@ -111,6 +111,10 @@ export default {
     }
   },
 
+  mounted() {
+    document.title = `Astraea - ${this.code}`;
+  },
+
   methods: {
     go_back_home() {
       window.location.hash = "/";

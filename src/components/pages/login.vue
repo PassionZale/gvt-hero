@@ -120,6 +120,10 @@ export default {
     };
   },
 
+  mounted() {
+    document.title = `Astraea - 登录`;
+  },
+
   methods: {
     submit() {
       this.$emit("login", Object.assign({}, this.form));

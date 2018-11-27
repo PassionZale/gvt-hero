@@ -85,10 +85,12 @@ export default {
             { name: parentMenu.innerText.trim() },
             { name: el.innerText.trim(), uri: aNode.getAttribute("href").trim() }
           ];
+
         } else {
           arr = [{ name: el.innerText.trim(), uri: aNode.getAttribute("href").trim() }]
         }
         this.sidebars = arr;
+        document.title = `Astraea - ${el.innerText.trim()}`;
       });
     },
     collectionHas(a, b) {
