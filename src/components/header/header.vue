@@ -127,8 +127,8 @@
         </div>
         <div class="user-menu" v-show="userMenuShow">
           <ul>
-            <li @click="userMenuClick('user-info')">个人信息</li>
-            <li @click="userMenuClick('mod-pwd')">修改密码</li>
+            <li v-show="menuInfo" @click="userMenuClick('user-info')">个人信息</li>
+            <li v-show="menuPwd" @click="userMenuClick('mod-pwd')">修改密码</li>
             <li @click="userMenuClick('logout')">注销</li>
           </ul>
         </div>
@@ -144,7 +144,9 @@ export default {
   props: {
     sidebars: { type: Array, default: () => [] },
     routers: { type: Array, default: () => [] },
-    username: [String]
+    username: [String],
+    menuInfo: [Boolean],
+    menuPwd: [Boolean]
   },
 
   data() {
@@ -160,8 +162,6 @@ export default {
       breads = this.sidebars.map(item => item);
       const loction = window.location;
       const prefix = `${location.origin}${location.pathname}`;
-      // http://localhost:8081/tmp.html
-      // httl://localhost:8081/
       if (length === 1) {
         this.routers.map((item, index) => {
           if (index > 0 && item.meta.title) {

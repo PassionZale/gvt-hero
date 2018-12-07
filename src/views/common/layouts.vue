@@ -3,6 +3,8 @@
     :username="username" 
     :menu-data="menuData" 
     :route-matched="routeMatched"
+    menu-info
+    menu-pwd
     @user-info-click="userinfo"
     @user-pwd-click="userpwd"
     @user-logout-click="userlogout">

@@ -17,5 +17,15 @@
         "uri": "http://localhost:8081/#/product/brand"
       }
     ]
+  },
+  {
+    "name": "订单综合",
+    "uri": "http://localhost:8081/#/order",
+    "icon": "icon-cargo",
+    "childBisFunction": [{
+        "name": "订单管理",
+        "uri": "http://localhost:8081/#/order/manage"
+      }
+    ]
   }
 ]

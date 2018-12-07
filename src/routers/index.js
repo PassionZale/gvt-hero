@@ -2,6 +2,7 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import Layout from "../views/common/layouts.vue"
 import productRoutes from "./product"
+import orderRoutes from "./order"
 import Error403 from "../views/common/403.vue"
 import Error404 from "../views/common/404.vue"
 import Error500 from "../views/common/500.vue"
@@ -49,6 +50,8 @@ const routerMap = [{
   },
 
   productRoutes,
+
+  orderRoutes,
 
   {
     path: "*",

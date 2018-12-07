@@ -1,7 +1,16 @@
 <template>
-  <h1>订单创建</h1>
+  <div>
+    <h1>订单创建</h1>
+    <br>
+    <router-link :to="{name: 'order-manage-list'}">-> 订单列表</router-link>
+    <br>
+    <router-link :to="{name: 'order-manage-edit'}">-> 订单编辑</router-link>
+    <br>
+    <router-link :to="{name: 'order-manage-create'}">-> 订单创建</router-link>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+};
 </script>

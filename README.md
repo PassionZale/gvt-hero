@@ -1,6 +1,6 @@
 # gvt-hero
 
-> GVT UI Components Package @1.1.25
+> GVT UI Components Package @1.1.27
 
 # 如何使用
 
@@ -56,6 +56,8 @@ props | 说明 | 数据类型 | 示例
 username | 用户名称  | String | "Gvt Hero"
 menu-data | 侧边栏菜单数据  | Array | []
 route-matched | vue-router 匹配集合 | Array | []
+menu-info | 个人信息 | Boolean | 默认 false
+menu-pwd | 修改密码 | Boolean | 默认 false
 
 ### events
 
@@ -82,6 +84,8 @@ touch layouts.vue
     :username="username" 
     :menu-data="menuData" 
     :route-matched="routeMatched"
+    menu-info
+    menu-pwd
     @user-info-click="userinfo"
     @user-pwd-click="userpwd"
     @user-logout-click="userlogout">

@@ -6,6 +6,8 @@
       :sidebars="sidebars" 
       :routers="routers"
       :username="username"
+      :menu-info="menuInfo"
+      :menu-pwd="menuPwd"
       @user-menu-click="userMenuClick">
     </gvt-header>
 
@@ -34,6 +36,10 @@ export default {
 
   props: {
     logo: [String],
+
+    menuInfo: [Boolean],
+
+    menuPwd: [Boolean],
 
     username: [String],
 
