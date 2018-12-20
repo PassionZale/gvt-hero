@@ -14,6 +14,7 @@
     <gvt-sidebar
       :data="menus" 
       :logo="logo" 
+      :app="appTarget"
       @menu-change="menuChange">
     </gvt-sidebar>
 
@@ -36,6 +37,8 @@ export default {
 
   props: {
     logo: [String],
+
+    appTarget: [String],
 
     menuInfo: [Boolean],
 

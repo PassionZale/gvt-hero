@@ -53,7 +53,9 @@ Vue.use(HeroUI)
 
 props | 说明 | 数据类型 | 示例
 ---- | ---- | ---- | ---- 
+logo | 产品图片 | String | "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjQCAANGMAAAR2Ug-7l4909.png"
 username | 用户名称  | String | "Gvt Hero"
+appTarget | 产品编码 | String | "apos-tenant"
 menu-data | 侧边栏菜单数据  | Array | []
 route-matched | vue-router 匹配集合 | Array | []
 menu-info | 个人信息 | Boolean | 默认 false

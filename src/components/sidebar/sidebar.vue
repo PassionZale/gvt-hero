@@ -207,7 +207,9 @@ export default {
     data: {
       type: Array,
       required: true
-    }
+    },
+    // 指定产品编码
+    app: [String]
   },
 
   data() {
@@ -297,7 +299,12 @@ export default {
 
       if (uri) {
         const token = localStorage.getItem("GVT_AUTH_TOKEN");
-        window.location.href = token ? `${uri}?token=${token}` : uri;
+        const appcode = this.app;
+        if(appcode) {
+          window.location.href = token ? `${uri}?token=${token}&appcode=${appcode}` : uri;
+        } else {
+          window.location.href = token ? `${uri}?token=${token}` : uri;
+        }
       }
     },
 
