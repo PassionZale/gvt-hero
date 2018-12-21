@@ -78,6 +78,7 @@ export default {
 
   created() {
     this.routers = this.routeMatched;
+    document.title = `Astraea`;
   },
 
   methods: {

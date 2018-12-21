@@ -3,9 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>gvt-hero</title>
+    <style>
+    #ie-not-support {
+      display: none;
+      position: absolute;
+      top: 150px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+    }
+    </style>
   </head>
   <body>
     <div id="app"></div>
+
+    <div id="ie-not-support">
+      <img src="//ws3.sinaimg.cn/large/005BYqpgly1fye5ohhdbmj307f06zgo4.jpg" alt="IE not support"/>
+      <p>为了更好的使用体验,&nbsp;请使用&nbsp;Chrome、FireFox&nbsp;等现代浏览器访问本系统!</p>
+    </div>
+
+    <script>
+      window.onload = function() {
+        if(!!window.ActiveXObject || "ActiveXObject" in window) {
+          document.querySelector("#ie-not-support").style.display = "block";
+        }
+      }
+    </script>
     <script src="/dist/gvt-hero.js"></script>
   </body>
 </html>

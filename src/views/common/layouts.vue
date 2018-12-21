@@ -57,7 +57,7 @@ export default {
       alert("userpwd");
     },
     userlogout() {
-      alert("userlogout");
+      this.$router.push("/login");
     }
   }
 };

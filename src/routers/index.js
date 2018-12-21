@@ -1,6 +1,7 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
 import Layout from "../views/common/layouts.vue"
+import Login from "../views/common/login.vue"
 import productRoutes from "./product"
 import orderRoutes from "./order"
 import Error403 from "../views/common/403.vue"
@@ -29,6 +30,12 @@ const routerMap = [{
         icon: "icon-mywork",
       }
     }]
+  },
+
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   },
 
   {
