@@ -1,6 +1,6 @@
 # gvt-hero
 
-> GVT UI Components Package @1.1.27
+> GVT UI Components Package @1.1.29
 
 # 如何使用
 
