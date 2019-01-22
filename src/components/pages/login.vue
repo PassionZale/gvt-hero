@@ -102,7 +102,7 @@
       </div>
     </div>
     <footer class="gvt-login-footer">
-      Copyright &copy; 2018 Grand View Technology. Ltd
+      Copyright &copy; 2019 Grand View Technology Pty Ltd
     </footer>
   </div>
 </template>
