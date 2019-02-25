@@ -162,19 +162,10 @@ export default {
       breads = this.sidebars.map(item => item);
       const loction = window.location;
       const prefix = `${location.origin}${location.pathname}`;
-      if (length === 1) {
-        this.routers.map((item, index) => {
-          if (index > 0 && item.meta.title) {
-            breads.push({ name: item.meta.title, uri: `${prefix}#${item.path}` });
-          }
-        });
-      } else if (length > 1) {
-        this.routers.map((item, index) => {
-          if (index > 1 && item.meta.title) {
-            breads.push({ name: item.meta.title, uri: `${prefix}#${item.path}` });
-          }
-        });
-      }
+
+      this.routers.map(item => {
+        if(item.meta.redirect) breads.push({name: item.meta.title, uri: `${prefix}#${item.path}` })
+      })
 
       return breads;
     }
