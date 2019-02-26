@@ -1,13 +1,7 @@
 import lang from "../lang"
-import { Lang } from "../lang"
 
-!Lang.getLang() && Lang.setLang()
-
-const locale = Lang.getLang()
-
-const langs = lang[locale]
-
-const parsePathKey = attrs => {
+const parsePathKey = (attrs, locale) => {
+  const langs = lang[locale]
   let msg = null
   attrs.map(item => {
     if (msg === null) {
@@ -24,16 +18,26 @@ const warn = (pathKey, locale) => {
 }
 
 const mixin = {
+  props: {
+    locale: {
+      type: String,
+      required: true,
+      validator(val) {
+        return ["zh-CN", "en-US"].indexOf(val) !== -1 ? true : false
+      }
+    },
+  },
+
   methods: {
     $heroT(pathKey) {
       const attrs = pathKey.split(".")
       let message = ""
       try {
-        message = parsePathKey(attrs)
-        message === undefined && warn(pathKey, locale)
+        message = parsePathKey(attrs, this.locale)
+        message === undefined && warn(pathKey, this.locale)
       } catch (e) {
         message = pathKey
-        warn(pathKey, locale)
+        warn(pathKey, this.locale)
       }
       return message
     }

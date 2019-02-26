@@ -53,6 +53,28 @@ Vue.use(HeroUI)
 <script src="./node_modules/gvt-hero/dist/gvt-hero.js"></script>
 ```
 
+## 子系统对接公共组件
+
+侧边栏进行跨系统跳转时, 会在 ```URL``` 中拼接 ```token``` 、```lang``` 参数, 例如:
+
+>http://localhost:9090/#/user-manage/user-list?lang=en-US&token=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxIiwidWlkIjoiMSIsInVzZXJuYW1lIjoiYWRtaW4iLCJ0eXBlIjoiMCIsInN5c3RlbSI6MSwiZXhwIjoxNTUyMTEyNTQ4fQ.cbaPqFhI8mVLLKjdjZn-N9_faz_L7iMV_BuhrJU3mOaY6Luu4YH-U2M1bd_TjPGHY-xAr1U6APFXKxuTtwb5XybMrHdhHFQTDgMJtLbHxf2qvVcf-1XD7yYRM7gdHmyQtXNZGrGhsHlfHBL4YIzD-VNxnfM9nR2h6HaWbkMHBGQ
+
+因此各个子系统, 需要在 ```main.js``` 主入口函数中, 接收并缓存 ```语种参数:lang```、```JWT参数:token```
+
+```javascript
+router.beforEach(to, from , next) => {
+  
+  // 每当 query.lang 存在时, 更新本地 lang, 否则默认使用 zh-CN
+  to.query.lang ? Lang.setLang(to.query.lang) : Lang.setLang()
+  setI18nLanguage(Lang.getLang())
+
+  // 每当 query.token 存在时, 更新本地 jwt
+  to.query.token && Auth.setToken(to.query.token);
+
+  // ... 其他代码
+}
+```
+
 ## hero-layout
 
 ### props

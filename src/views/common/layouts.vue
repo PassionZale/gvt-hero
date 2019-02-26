@@ -3,6 +3,7 @@
     :username="username" 
     :menu-data="menuData" 
     :route-matched="routeMatched"
+    :locale="lang"
     menu-info
     menu-pwd
     @user-info-click="userinfo"
@@ -22,7 +23,8 @@ export default {
     return {
       menuData: [],
       routeMatched: [],
-      username: "Gvt Hero"
+      username: "Gvt Hero",
+      lang: localStorage.getItem("GVT_I18N_LANG") || 'zh-CN'
     };
   },
 

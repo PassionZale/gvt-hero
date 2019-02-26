@@ -6,6 +6,12 @@
     "icon": "icon-mywork"
   },
   {
+    "name": "用户管理",
+    "enName": "Users",
+    "uri": "http://localhost:9090/#/user-manage/user-list",
+    "icon": "icon-mywork"
+  },
+  {
     "name": "商品综合",
     "enName": "Goods",
     "uri": "http://localhost:8081/#/product",

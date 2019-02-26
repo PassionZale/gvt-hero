@@ -1,7 +1,4 @@
 <style lang="less">
-/*  sidebar css */
-
-
 .gvt-sidebar {
   height: 100%;
   width: 220px;
@@ -187,16 +184,17 @@
           </a>
         </div>
       </div>
-
     </ul>
   </div>
 </template>
 
 <script>
-import { Lang } from "../../lang"
+import i18nT from "../../mixins"
 
 export default {
   name: "hero-sidebar",
+
+  mixins: [i18nT],
 
   props: {
     // 侧边栏 LOGO
@@ -217,8 +215,7 @@ export default {
   data() {
     return {
       href: "",
-      inited: false,
-      lang: Lang.getLang()
+      inited: false
     };
   },
 
@@ -260,8 +257,7 @@ export default {
 
   methods: {
     translate(menuItem) {
-      const locale = this.lang
-      const name = locale === "zh-CN" ? menuItem.name : menuItem.enName
+      const name = this.locale === "zh-CN" ? menuItem.name : menuItem.enName
       // 若 enName 不存在, 则自动降级取中文名称
       return name ? name : menuItem.name
     },
@@ -309,11 +305,12 @@ export default {
 
       if (uri) {
         const token = localStorage.getItem("GVT_AUTH_TOKEN");
+        const lang = this.locale
         const appcode = this.app;
         if(appcode) {
-          window.location.href = token ? `${uri}?token=${token}&appcode=${appcode}` : uri;
+          window.location.href = token ? `${uri}?lang=${lang}&token=${token}&appcode=${appcode}` : uri;
         } else {
-          window.location.href = token ? `${uri}?token=${token}` : uri;
+          window.location.href = token ? `${uri}?lang=${lang}&token=${token}` : uri;
         }
       }
     },

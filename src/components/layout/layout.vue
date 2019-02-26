@@ -8,6 +8,7 @@
       :username="username"
       :menu-info="menuInfo"
       :menu-pwd="menuPwd"
+      :locale="locale"
       @user-menu-click="userMenuClick">
     </gvt-header>
 
@@ -15,6 +16,7 @@
       :data="menus" 
       :logo="logo" 
       :app="appTarget"
+      :locale="locale"
       @menu-change="menuChange">
     </gvt-sidebar>
 
@@ -30,15 +32,25 @@
 import GvtHeader from "../header";
 import GvtSidebar from "../sidebar";
 import GvtContent from "../content";
+
 export default {
   name: "hero-layout",
 
   components: { GvtHeader, GvtSidebar, GvtContent },
 
+
   props: {
     logo: [String],
 
     appTarget: [String],
+
+    locale: {
+      type: String,
+      required: true,
+      validator(val) {
+        return ["zh-CN", "en-US"].indexOf(val) !== -1 ? true : false
+      }
+    },
 
     menuInfo: [Boolean],
 
