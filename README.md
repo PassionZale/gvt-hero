@@ -1,10 +1,10 @@
 # gvt-hero
 
-### 国际化
+### 无国际化
 
 - GVT UI Components Package @1.1.30
 
-### 无国际化
+### 国际化
 
 - GVT UI Components Package @1.2.0
 
