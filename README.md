@@ -8,8 +8,6 @@
 
 - GVT UI Components Package @1.2.0
 
-- 有国际化
-
 # 如何使用
 
 ## 安装
