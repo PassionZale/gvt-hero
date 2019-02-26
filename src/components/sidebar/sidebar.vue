@@ -257,7 +257,7 @@ export default {
 
   methods: {
     translate(menuItem) {
-      const locale = localStorage.getItem("GVT-I18N-LANG") ? localStorage.getItem("GVT-I18N-LANG") : "en-US"
+      const locale = localStorage.getItem("GVT-I18N-LANG") ? localStorage.getItem("GVT-I18N-LANG") : "zh-CN"
       const name = locale === "zh-CN" ? menuItem.name : menuItem.enName
       // 若 enName 不存在, 则自动降级取中文名称
       return name ? name : menuItem.name

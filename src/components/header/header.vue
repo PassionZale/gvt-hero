@@ -38,6 +38,7 @@
     }
 
     .tool-timezone {
+      user-select: none;
       color: #a7a7a7;
       margin-right: 10px;
     }
@@ -49,9 +50,62 @@
       }
     }
 
+    .tool-lang {
+      position: relative;
+      text-align: left;
+      user-select: none;
+      margin-right: -5px;
+      .tool-label {
+        padding: 20px 10px;
+        min-width: 110px;
+        border-left: 1px solid #e9effa;
+        cursor: pointer;
+        &:after {
+          border: solid #333333;
+          border-width: 0 2px 2px 0;
+          display: inline-block;
+          margin-left: 5px;
+          padding: 3px;
+          transform: rotate(45deg);
+          line-height: 30px;
+          position: relative;
+          top: -3px;
+          content: " ";
+        }
+      }
+      .tool-menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        max-height: 200px;
+        width: 100%;
+        overflow: auto;
+        background-color: #fff;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        z-index: 900;
+        ul {
+          list-style-type: none;
+          border-right: 1px solid #e5e5e5;
+          border-left: 1px solid #e5e5e5;
+          border-bottom: 1px solid #e5e5e5;
+          li {
+            padding: 10px;
+            cursor: pointer;
+            border-top: 1px solid #e5e5e5;
+            &:hover {
+              background-color: #f2f3f5;
+              color: #409fff;
+            }
+          }
+        }
+      }
+    }
+
     .tool-user {
       position: relative;
       text-align: left;
+      user-select: none;
       .user-name {
         padding: 20px 10px;
         min-width: 110px;
@@ -117,11 +171,25 @@
         </template>
       </template>
     </div>
+
     <div class="gvt-tool">
       <div class="tool-timezone">
         {{ $heroT("header.currentTimeZone") }}
         {{ getClientTimezone() }}
       </div>
+
+      <div class="tool-lang"  v-clickoutside="handleLangMenuClose" @click="langMenuShow = !langMenuShow">
+        <div class="tool-label">
+          {{ $heroT("header.i18n") }}
+        </div>
+        <div class="tool-menu" v-show="langMenuShow">
+          <ul>
+            <li>简体中文</li>
+            <li>English</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="tool-user" v-clickoutside="handleUserMenuClose" @click="userMenuShow = !userMenuShow">
         <div class="user-name">
           {{ username }}
@@ -162,6 +230,7 @@ export default {
 
   data() {
     return {
+      langMenuShow: false,
       userMenuShow: false
     };
   },
@@ -204,6 +273,10 @@ export default {
   },
 
   methods: {
+    handleLangMenuClose() {
+      this.langMenuShow = false;
+    },
+
     handleUserMenuClose() {
       this.userMenuShow = false;
     },

@@ -23,6 +23,7 @@ const lang = {
 
   header: {
     currentTimeZone: "当前时区：",
+    i18n: "多语言",
     userInfo: "个人信息",
     updatePwd: "修改密码",
     logOut: "注销"
