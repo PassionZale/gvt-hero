@@ -193,6 +193,8 @@
 </template>
 
 <script>
+import { Lang } from "../../lang"
+
 export default {
   name: "hero-sidebar",
 
@@ -215,7 +217,8 @@ export default {
   data() {
     return {
       href: "",
-      inited: false
+      inited: false,
+      lang: Lang.getLang()
     };
   },
 
@@ -257,7 +260,7 @@ export default {
 
   methods: {
     translate(menuItem) {
-      const locale = localStorage.getItem("GVT-I18N-LANG") ? localStorage.getItem("GVT-I18N-LANG") : "zh-CN"
+      const locale = this.lang
       const name = locale === "zh-CN" ? menuItem.name : menuItem.enName
       // 若 enName 不存在, 则自动降级取中文名称
       return name ? name : menuItem.name

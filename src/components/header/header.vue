@@ -184,8 +184,8 @@
         </div>
         <div class="tool-menu" v-show="langMenuShow">
           <ul>
-            <li>简体中文</li>
-            <li>English</li>
+            <li @click="changeLang('zh-CN')" v-show="lang !== 'zh-CN'">简体中文</li>
+            <li @click="changeLang('en-US')" v-show="lang !== 'en-US'">English</li>
           </ul>
         </div>
       </div>
@@ -214,6 +214,7 @@
 
 <script>
 import i18nT from "../../mixins"
+import { Lang } from "../../lang"
 
 export default {
   name: "hero-header",
@@ -231,7 +232,8 @@ export default {
   data() {
     return {
       langMenuShow: false,
-      userMenuShow: false
+      userMenuShow: false,
+      lang: Lang.getLang()
     };
   },
 
@@ -275,6 +277,11 @@ export default {
   methods: {
     handleLangMenuClose() {
       this.langMenuShow = false;
+    },
+
+    changeLang(lang) {
+      Lang.setLang(lang)
+      window.location.reload()
     },
 
     handleUserMenuClose() {

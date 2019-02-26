@@ -1,6 +1,9 @@
 import lang from "../lang"
+import { Lang } from "../lang"
 
-const locale = localStorage.getItem("GVT-I18N-LANG") ? localStorage.getItem("GVT-I18N-LANG") : "zh-CN"
+!Lang.getLang() && Lang.setLang()
+
+const locale = Lang.getLang()
 
 const langs = lang[locale]
 
