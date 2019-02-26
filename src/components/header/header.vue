@@ -279,7 +279,27 @@ export default {
 
     changeLocale(lang) {
       localStorage.setItem("GVT_I18N_LANG", lang)
+      // 获取当前 url
+      let url = window.location.href
+      // 搜索当前 url 中是否包含 ?lang 参数
+      const paramsLang = this.getParameterByName("lang", url)
+      if(paramsLang) {
+        // 替换 paramsLang 为 lang
+        const reg = new RegExp(`/${paramsLang}/`);
+        url = url.replace(reg, lang)
+      }
+      window.location.href = url
       window.location.reload()
+    },
+
+    getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
     },
 
     handleUserMenuClose() {

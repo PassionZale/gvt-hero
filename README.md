@@ -55,6 +55,8 @@ Vue.use(HeroUI)
 
 ## 子系统对接公共组件
 
+**后面再细写... 这样接入有些问题**
+
 侧边栏进行跨系统跳转时, 会在 ```URL``` 中拼接 ```token``` 、```lang``` 参数, 例如:
 
 >http://localhost:9090/#/user-manage/user-list?lang=en-US&token=eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxIiwidWlkIjoiMSIsInVzZXJuYW1lIjoiYWRtaW4iLCJ0eXBlIjoiMCIsInN5c3RlbSI6MSwiZXhwIjoxNTUyMTEyNTQ4fQ.cbaPqFhI8mVLLKjdjZn-N9_faz_L7iMV_BuhrJU3mOaY6Luu4YH-U2M1bd_TjPGHY-xAr1U6APFXKxuTtwb5XybMrHdhHFQTDgMJtLbHxf2qvVcf-1XD7yYRM7gdHmyQtXNZGrGhsHlfHBL4YIzD-VNxnfM9nR2h6HaWbkMHBGQ
