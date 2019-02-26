@@ -119,7 +119,8 @@
     </div>
     <div class="gvt-tool">
       <div class="tool-timezone">
-        当前时区：{{ getClientTimezone() }}
+        {{ $heroT("header.currentTimeZone") }}
+        {{ getClientTimezone() }}
       </div>
       <div class="tool-user" v-clickoutside="handleUserMenuClose" @click="userMenuShow = !userMenuShow">
         <div class="user-name">
@@ -127,9 +128,15 @@
         </div>
         <div class="user-menu" v-show="userMenuShow">
           <ul>
-            <li v-show="menuInfo" @click="userMenuClick('user-info')">个人信息</li>
-            <li v-show="menuPwd" @click="userMenuClick('mod-pwd')">修改密码</li>
-            <li @click="userMenuClick('logout')">注销</li>
+            <li v-show="menuInfo" @click="userMenuClick('user-info')">
+              {{ $heroT("header.userInfo") }}
+            </li>
+            <li v-show="menuPwd" @click="userMenuClick('mod-pwd')">
+              {{ $heroT("header.updatePwd") }}
+            </li>
+            <li @click="userMenuClick('logout')">
+              {{ $heroT("header.logOut") }}
+            </li>
           </ul>
         </div>
       </div>
@@ -138,8 +145,12 @@
 </template>
 
 <script>
+import i18nT from "../../mixins"
+
 export default {
   name: "hero-header",
+
+  mixins: [i18nT],
 
   props: {
     sidebars: { type: Array, default: () => [] },

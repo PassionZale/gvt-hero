@@ -86,19 +86,21 @@
     <div class="gvt-login-skin"></div>
     <img class="gvt-login-icon" src="//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjMOAQHHgAAKHbYU_e_w612.png"/>
     <div class="gvt-login-form gvt-form">
-      <p class="gvt-login-title">账号登录</p>
+      <p class="gvt-login-title">{{ $heroT("loginForm.title") }}</p>
       <div class="gvt-form-item">
-        <label>用户名</label>
+        <label>{{ $heroT("loginForm.username") }}</label>
         <br>
         <input type="text" v-model="form.username" @keyup.enter="submit" />
       </div>
       <div class="gvt-form-item">
-        <label>密码</label>
+        <label>{{ $heroT("loginForm.password") }}</label>
         <br>
         <input type="password" v-model="form.password" @keyup.enter="submit" />
       </div>
       <div class="gvt-form-item">
-        <button type="button" @click="submit">登录</button>
+        <button type="button" @click="submit">
+          {{ $heroT("loginForm.loginBtn") }}
+        </button>
       </div>
     </div>
     <footer class="gvt-login-footer">
@@ -108,8 +110,12 @@
 </template>
 
 <script>
+import i18nT from "../../mixins"
+
 export default {
   name: "hero-login",
+
+  mixins: [i18nT],
 
   data() {
     return {
@@ -121,7 +127,7 @@ export default {
   },
 
   mounted() {
-    document.title = `Astraea - 登录`;
+    document.title = `Astraea - ${this.$heroT("loginForm.loginBtn")}`;
   },
 
   methods: {

@@ -66,25 +66,41 @@
     <div class="error-wrapper" :class="errorClass">
       <div class="error-info" v-if="code === '404'">
         <p class="error-title">—&emsp;404 Not Found</p> 
-        <p class="error-desc">页面不见了只是为了下一次的与你</p>
-        <p class="error-desc">——重逢~</p>
+        <p class="error-desc">
+          {{ $heroT("errorView.404.title") }}
+        </p>
+        <p class="error-desc">
+          {{ $heroT("errorView.404.desc") }}
+        </p>
         <div class="error-btns">
-          <span class="home_btn" @click="go_back_home">返回首页</span>
+          <span class="home_btn" @click="go_back_home">
+            {{ $heroT("errorView.goHomeBtn") }}
+          </span>
         </div>
       </div>
       <div class="error-info" v-else-if="code === '403'">
         <p class="error-title">—&emsp;403 Forbidden</p> 
-        <p class="error-desc">也许你还没有获得进入的权限</p>
-        <p class="error-desc">——或者再试一次吧~</p>
+        <p class="error-desc">
+          {{ $heroT("errorView.403.title") }}
+        </p>
+        <p class="error-desc">
+          {{ $heroT("errorView.403.desc") }}
+        </p>
         <div class="error-btns">
-          <span class="home_btn" @click="go_back_home">返回首页</span>
+          <span class="home_btn" @click="go_back_home">
+            {{ $heroT("errorView.goHomeBtn") }}
+          </span>
         </div>
       </div>
       <div class="error-info" v-else>
         <p class="error-title">—&emsp;500 Error</p> 
-        <p class="error-desc">服务器犯了错, 我们决定镇压它 500 年</p>
+        <p class="error-desc">
+          {{ $heroT("errorView.500.title") }}
+        </p>
         <div class="error-btns">
-          <span class="home_btn" @click="go_back_home">返回首页</span>
+          <span class="home_btn" @click="go_back_home">
+            {{ $heroT("errorView.goHomeBtn") }}
+          </span>
         </div>
       </div>
     </div>  
@@ -92,8 +108,12 @@
 </template>
 
 <script>
+import i18nT from "../../mixins"
+
 export default {
   name: "hero-error",
+
+  mixins: [i18nT],
 
   props: {
     code: {
