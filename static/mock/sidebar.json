@@ -1,29 +1,35 @@
 [
   {
     "name": "首页",
+    "enName": "Home",
     "uri": "http://localhost:8081/#/console",
     "icon": "icon-mywork"
   },
   {
     "name": "商品综合",
+    "enName": "Goods",
     "uri": "http://localhost:8081/#/product",
     "icon": "icon-cargo",
     "childBisFunction": [{
         "name": "商品管理",
+        "enName": "Goods manage",
         "uri": "http://localhost:8081/#/product/manage"
       },
       {
         "name": "品牌管理",
+        "enName": "Brands manage",
         "uri": "http://localhost:8081/#/product/brand"
       }
     ]
   },
   {
     "name": "订单综合",
+    "enName": "Orders",
     "uri": "http://localhost:8081/#/order",
     "icon": "icon-cargo",
     "childBisFunction": [{
         "name": "订单管理",
+        "enName": "Orders manage",
         "uri": "http://localhost:8081/#/order/manage"
       }
     ]

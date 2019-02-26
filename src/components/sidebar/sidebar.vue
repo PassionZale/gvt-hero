@@ -164,14 +164,14 @@
           <li class="gvt-menu-submenu">
             <div class="gvt-menu-submenu-title" @click="toggleExpand" v-active-submenu>
               <hero-icon :name="item.icon" style="margin-right:10px;" v-if="item.icon"></hero-icon>
-              {{ item.name }}
+              {{ translate(item) }}
               <i class="gvt-submenu-arrow"></i>
             </div>
             <ul class="gvt-menu">
               <div v-for="(child, c_index) in item.childBisFunction">
                 <a :href="child.uri" @click.prevent="menu_item_click(false, child.uri, $event)">
                   <li class="gvt-menu-item" :class="{'icon-missing': !item.icon, 'active': isCurrentMenu(child)}">
-                    {{ child.name }}
+                    {{ translate(child) }}
                   </li>
                 </a>
               </div>
@@ -182,7 +182,7 @@
           <a :href="item.uri" @click.prevent="menu_item_click(true, item.uri, $event)">
             <li class="gvt-menu-item" :class="{'icon-missing': !item.icon, 'active': isCurrentMenu(item)}">
               <hero-icon :name="item.icon" style="margin-right:10px;" v-if="item.icon"></hero-icon>
-              {{ item.name }}
+              {{ translate(item) }}
             </li>
           </a>
         </div>
@@ -256,6 +256,13 @@ export default {
   },
 
   methods: {
+    translate(menuItem) {
+      const locale = localStorage.getItem("GVT-I18N-LANG") ? localStorage.getItem("GVT-I18N-LANG") : "en-US"
+      const name = locale === "zh-CN" ? menuItem.name : menuItem.enName
+      // 若 enName 不存在, 则自动降级取中文名称
+      return name ? name : menuItem.name
+    },
+
     menu_item_click(singleMenu = false, uri = "", event) {
       // 面包屑集合
       let breads = [];

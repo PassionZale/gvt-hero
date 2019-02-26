@@ -22,9 +22,9 @@ const lang = {
   },
 
   header: {
-    currentTimeZone: "Current time zone:",
-    userInfo: "Personal information",
-    updatePwd: "Change Password",
+    currentTimeZone: "Time Zone:",
+    userInfo: "Personal Info",
+    updatePwd: "Password Change",
     logOut: "Logout"
   },
 }
