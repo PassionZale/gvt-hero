@@ -6,7 +6,7 @@
 
 ### 国际化
 
-- GVT UI Components Package @1.2.0
+- GVT UI Components Package @1.2.6
 
 # 如何使用
 
@@ -163,7 +163,7 @@ export default Lang;
 ```
 
 ```javascript
-// Util Module
+// Auth Module
 
 const prefixToken = "GVT_AUTH_TOKEN";
 
