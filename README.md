@@ -367,7 +367,7 @@ touch 404.vue
 
 ```html
 <template>
-  <hero-error></hero-error>
+  <hero-error :locale="locale"></hero-error>
 </template>
 ```
 
