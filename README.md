@@ -193,22 +193,72 @@ class Auth {
 export default Auth;
 ```
 
+## 面包屑导航
+
+### 获取侧边栏数据
+
+组件会自动获取当前侧边栏所匹配导航的 ```文本``` 和 ```url```, 并将其按层级关系添加至面包屑中, 例如:
+
+1. 若当前为单级菜单点击, 组件会获取其 ```文本``` (如: 首页), 而后会获取其 ```url``` (如: http://example.com/), 而后显示在面包屑中, 此时面包屑显示: **首页**
+
+2. 若当前为二级菜单点击, 组件会获取一级二级菜单, 参照第一步获取相应 ```文本``` 及 ```url```, 而后显示在面包屑中, 此时面包屑显示: **应用管理 > 产品管理**
+
+### 获取路由数据
+
+```javascript
+// 产品管理 路由对象
+
+const router = {
+  path: "product-manage",
+  name: "product-manage",
+  component: () => import("@/components/container/ContainerBase"),
+  redirect: { name: "product-list" },
+  children: [
+    {
+      path: "/",
+      name: "product-list",
+      meta:{ title: "产品列表", redirect: true },
+      component: () => import("@/views/admin/application-manage/product-manage/List")
+    },
+    {
+      path: "create",
+      name: "product-create",
+      meta:{ title: "产品创建", redirect: true },
+      component: () => import("@/views/admin/application-manage/product-manage/CreateOrUpdate")
+    },
+    {
+      path: "edit/:id",
+      name: "product-edit",
+      meta:{ title: "产品编辑", redirect: true },
+      component: () => import("@/views/admin/application-manage/product-manage/CreateOrUpdate")
+    }
+  ]
+}
+```
+
+组件会根据 ```route-matched``` 自行解析出 ```meta: {redirect: true}``` 的路由, 并将其拼接在侧边栏数据后, 若当前 ```path``` 为: ```http://localhost:9090/#/application-manage/product-manage```
+
+此时 ```产品列表``` 包含 ```meta: {redirect: true}```, 那么它将被添加至面包屑中, 此时面包屑显示: **应用管理 > 产品管理 > 产品列表**
+
+若将 ```产品列表``` 只为 ```meta: {redirect: false}``` 或不声明 ```redirect``` 键, 如: ```meta: {}```, 那么它将**不被**添加至面包屑中, 此时面包屑显示: **应用管理 > 产品管理**
+
+
 ## hero-layout
 
-### props
+### Props
 
-props | 说明 | 数据类型 | 示例 | 备注
+props | 说明 | 数据类型 | 备注 | 示例
 ---- | ---- | ---- | ---- | ---
-logo | 产品图片 | String | "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjQCAANGMAAAR2Ug-7l4909.png" | 侧边栏菜单顶部 LOGO 显示, 大部分情况无需传入
-locale | 语种 | String | "zh-CN" | required & ["zh-CN", "en-US"]
-username | 用户名称  | String | "Gvt Hero" | 通过 vuex getters 获取
-appTarget | 产品编码 | String | "apos-tenant" | 兼容 APOS 只显示自身产品数据, 非特殊情况无需传递
-menu-data | 侧边栏菜单数据  | Array | []
-route-matched | vue-router 匹配集合 | Array | []
-menu-info | 个人信息 | Boolean | 默认 false
-menu-pwd | 修改密码 | Boolean | 默认 false
+logo | 产品图片 | String | 侧边栏菜单顶部 LOGO 显示, 大部分情况无需传入 | "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjQCAANGMAAAR2Ug-7l4909.png"
+locale | 语种 | String | required & ["zh-CN", "en-US"] | "zh-CN"
+username | 用户名称  | String | 通过 vuex getters 获取 | "Gvt Hero"
+appTarget | 产品编码 | String | 兼容 APOS 只显示自身产品数据, 非特殊情况无需传递 | "apos-tenant"
+menu-data | 侧边栏菜单数据  | Array | 通过 getUserRelatedData() 获取
+route-matched | vue-router 匹配集合 | Array | 通过 this.$route.matched 获取
+menu-info | 个人信息 | Boolean | 显示"个人信息"按钮, 默认 false 
+menu-pwd | 修改密码 | Boolean | 显示"修改密码"按钮, 默认 false 
 
-### events
+### Events
 
 events | 说明 
 ---- | ----
