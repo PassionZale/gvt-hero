@@ -6,7 +6,7 @@
 
 ### 国际化
 
-- GVT UI Components Package @1.2.6
+- GVT UI Components Package @1.2.7
 
 # 如何使用
 
