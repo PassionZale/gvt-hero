@@ -9,6 +9,7 @@
       :menu-info="menuInfo"
       :menu-pwd="menuPwd"
       :locale="locale"
+      :disTranslation="disTranslation"
       @user-menu-click="userMenuClick">
     </gvt-header>
 
@@ -43,6 +44,8 @@ export default {
     logo: [String],
 
     appTarget: [String],
+
+    disTranslation: Boolean,
 
     locale: {
       type: String,

@@ -178,7 +178,7 @@
         {{ getClientTimezone() }}
       </div>
 
-      <div class="tool-lang"  v-clickoutside="handleLangMenuClose" @click="langMenuShow = !langMenuShow">
+      <div class="tool-lang" v-show="!disTranslation"  v-clickoutside="handleLangMenuClose" @click="langMenuShow = !langMenuShow">
         <div class="tool-label">
           {{ $heroT("header.i18n") }}
         </div>
@@ -225,7 +225,8 @@ export default {
     routers: { type: Array, default: () => [] },
     username: [String],
     menuInfo: [Boolean],
-    menuPwd: [Boolean]
+    menuPwd: [Boolean],
+    disTranslation: [Boolean]
   },
 
   data() {

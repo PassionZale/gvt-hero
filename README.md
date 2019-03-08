@@ -253,6 +253,7 @@ logo | 产品图片 | String | 侧边栏菜单顶部 LOGO 显示, 大部分情�
 locale | 语种 | String | required & ["zh-CN", "en-US"] | "zh-CN"
 username | 用户名称  | String | 通过 vuex getters 获取 | "Gvt Hero"
 appTarget | 产品编码 | String | 兼容 APOS 只显示自身产品数据, 非特殊情况无需传递 | "apos-tenant"
+disTranslation | 是否禁用语言切换 | Boolean | 默认显示语言切换框 | true
 menu-data | 侧边栏菜单数据  | Array | 通过 getUserRelatedData() 获取
 route-matched | vue-router 匹配集合 | Array | 通过 this.$route.matched 获取
 menu-info | 个人信息 | Boolean | 显示"个人信息"按钮, 默认 false 
@@ -272,8 +273,7 @@ user-logout-click | 注销按钮点击
 # 使用 hero-layout, 快速构建子系统的布局容器
 # 你也可以参照 ./src/views/common/layouts.vue
 # 以下示例是标准使用方法
-# 若你的 router.meta.title 未设置或设置的值为空
-# 即 meta.title == false, 则它将不会出现在面包屑中
+# 若要禁用语言切换功能, 声明 dis-translation 即可
 touch layouts.vue
 ```
 
@@ -286,6 +286,7 @@ touch layouts.vue
     :locale="locale"
     menu-info
     menu-pwd
+    dis-translation
     @user-info-click="userinfo"
     @user-pwd-click="userpwd"
     @user-logout-click="userlogout">
