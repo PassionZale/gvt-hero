@@ -23,7 +23,7 @@ const lang = {
 
   header: {
     currentTimeZone: "Time Zone:",
-    i18n: "Translations",
+    i18n: "Languages",
     userInfo: "Personal Info",
     updatePwd: "Password Change",
     logOut: "Logout"
