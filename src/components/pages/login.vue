@@ -43,16 +43,55 @@
   .gvt-form-item {
     margin-bottom: 10px;
   }
-  label {
+  label.gvt-form-item-label {
     display: inline-block;
     margin-bottom: 10px;
   }
-  input {
+  input.gvt-form-item-input {
     border: 1px solid #cccccc;
     height: 36px;
     border-radius: 4px;
     width: 100%;
     padding: 0 6px;
+  }
+  input.gvt-form-item-radio {
+    vertical-align: middle;
+    &:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+    &:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #409fff;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+  }
+  label.gvt-form-item-radio-label {
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+    margin-right: 10px;
+    user-select: none;
   }
   button {
     width: 100%;
@@ -88,14 +127,24 @@
     <div class="gvt-login-form gvt-form">
       <p class="gvt-login-title">{{ $heroT("loginForm.title") }}</p>
       <div class="gvt-form-item">
-        <label>{{ $heroT("loginForm.username") }}</label>
+        <label class="gvt-form-item-label">{{ $heroT("loginForm.username") }}</label>
         <br>
-        <input type="text" v-model="form.username" @keyup.enter="submit" />
+        <input class="gvt-form-item-input" type="text" v-model="form.username" @keyup.enter="submit" />
       </div>
       <div class="gvt-form-item">
-        <label>{{ $heroT("loginForm.password") }}</label>
+        <label class="gvt-form-item-label">{{ $heroT("loginForm.password") }}</label>
         <br>
-        <input type="password" v-model="form.password" @keyup.enter="submit" />
+        <input class="gvt-form-item-input" type="password" v-model="form.password" @keyup.enter="submit" />
+      </div>
+      <div class="gvt-form-item">
+        <label class="gvt-form-item-radio-label">
+          <input class="gvt-form-item-radio" type="radio" value="zh-CN" v-model="lang">
+          简体中文
+        </label>
+        <label class="gvt-form-item-radio-label">
+          <input class="gvt-form-item-radio" type="radio" value="en-US" v-model="lang">
+          English
+        </label>
       </div>
       <div class="gvt-form-item">
         <button type="button" @click="submit">
@@ -122,8 +171,20 @@ export default {
       form: {
         username: "",
         password: ""
-      }
+      },
+
+      lang: this.locale
     };
+  },
+
+  watch: {
+    lang(val) {
+      this.$emit("update:locale", val)
+    },
+
+    locale(val) {
+      this.lang = val
+    }
   },
 
   mounted() {
