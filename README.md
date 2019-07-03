@@ -367,19 +367,47 @@ export default {
 touch Login.vue
 ```
 
+### props
+
+prop | 说明 
+---- | ----
+locale | 语种, 可使用 ```.sync``` 修饰符进行双向绑定, 默认 "zh-CN" 
+login-back-url | 后台登录背景图片地址
+login-url | 后台登录图片地址
+domain-icp-no | 域名备案号
+
+### slot
+
+默认插槽, 用以容纳第三方登录, 数据由 UMS supportType 获取
+
+### 示例
+
 ```html
 <template>
-  <hero-login @login="submit" :locale="locale"></hero-login>
+  <hero-login 
+    @login="submit" 
+    :locale.sync="lang"
+    :login-back-url="YOUR_IMAGE_URL"
+    :login-url="YOUR_IMAGE_URL"
+    :domain-icp-no="YOUR_ICP_NO">
+  </hero-login>
 </template>
 ```
 
 ```javascript
-import Lang from "@/utils/lang"
+import Lang from "@/utils/lang";
+import { setI18nLanguage } from "@/setup/i18n-setup";
 
 export default {
   data() {
     return {
-      locale: Lang.getLang()
+      lang: Lang.getLang()
+    }
+  },
+
+  watch: {
+    lang(lang) {
+      setI18nLanguage(lang);
     }
   },
 
@@ -409,7 +437,7 @@ export default {
 
 ### props
 
-props | 说明 | 数据类型 | 示例
+prop | 说明 | 数据类型 | 示例
 ---- | ---- | ---- | ---- 
 code | 视图代码,默认 "404", 只提供"403","404","500"  | String | "403" 、"404"、"500"
 
