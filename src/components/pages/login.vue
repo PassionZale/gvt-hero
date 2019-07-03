@@ -6,7 +6,7 @@
   right: 0;
   bottom: 0;
   z-index: 1;
-  background-image: url("//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjKSAc6R_AAIzKAUmJ-U070.png");
+  // background-image: url("//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjKSAc6R_AAIzKAUmJ-U070.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -122,8 +122,8 @@
 
 <template>
   <div>
-    <div class="gvt-login-skin"></div>
-    <img class="gvt-login-icon" src="//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjMOAQHHgAAKHbYU_e_w612.png"/>
+    <div class="gvt-login-skin" :style="{background:  'url(' + $loginSkinSrc + ')'}"></div>
+    <img class="gvt-login-icon" :src="$loginIconSrc"/>
     <div class="gvt-login-form gvt-form">
       <p class="gvt-login-title">{{ $heroT("loginForm.title") }}</p>
       <div class="gvt-form-item">
@@ -151,9 +151,10 @@
           {{ $heroT("loginForm.loginBtn") }}
         </button>
       </div>
+      <slot></slot>
     </div>
     <footer class="gvt-login-footer">
-      Copyright &copy; 2019 Grand View Technology Pty Ltd
+      <span v-html="$copyRight"></span>
     </footer>
   </div>
 </template>
@@ -175,6 +176,37 @@ export default {
 
       lang: this.locale
     };
+  },
+
+  props: {
+    // 后台登录背景图片
+    loginBackUrl: {
+      type: [String],
+      default: ""
+    },
+    // 后台登录图片
+    loginUrl: {
+      type: [String],
+      default: ""
+    },
+    // 域名备案号
+    domainIcpNo: {
+      typoe: [String],
+      default: ""
+    }
+  },
+
+  computed: {
+    $loginIconSrc() {
+      return this.loginUrl ? this.loginUrl : "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjMOAQHHgAAKHbYU_e_w612.png";
+    },
+    $loginSkinSrc() {
+      return this.loginBackUrl ? this.loginBackUrl : "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjKSAc6R_AAIzKAUmJ-U070.png";
+    },
+    $copyRight() {
+      const currentYear = new Date().getFullYear();
+      return this.domainIcpNo ? this.domainIcpNo : `Copyright &copy; ${currentYear} Grand View Technology Pty Ltd`;
+    }
   },
 
   watch: {

@@ -153,7 +153,7 @@
 <template>
   <div class="gvt-sidebar">
     <div class="gvt-sidebar-logo">
-      <img :src="logo" alt="Logo Image" />
+      <img :src="$logSrc" alt="Logo Image" />
     </div>
     <ul class="gvt-menu">
       <div v-for="(item, p_index) in data">
@@ -200,8 +200,7 @@ export default {
     // 侧边栏 LOGO
     logo: {
       type: String,
-      default:
-        "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjQCAANGMAAAR2Ug-7l4909.png"
+      default: ""
     },
     // 侧边栏 DATA
     data: {
@@ -217,6 +216,12 @@ export default {
       href: "",
       inited: false
     };
+  },
+
+  computed: {
+    $logSrc() {
+      return this.logo ? this.logo : "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjQCAANGMAAAR2Ug-7l4909.png";
+    }
   },
 
   directives: {
@@ -353,10 +358,9 @@ export default {
       var all = document.querySelectorAll(selector);
       var cur = elm.parentNode;
       while (cur && !this.collectionHas(all, cur)) {
-        //keep going up until you find a match
-        cur = cur.parentNode; //go up
+        cur = cur.parentNode; 
       }
-      return cur; //will return null if not found
+      return cur; 
     }
   }
 };

@@ -22,6 +22,7 @@ const mixin = {
     locale: {
       type: String,
       required: true,
+      default: "zh-CN",
       validator(val) {
         return ["zh-CN", "en-US"].indexOf(val) !== -1 ? true : false
       }
