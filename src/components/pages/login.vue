@@ -1,4 +1,4 @@
-<style lang="less" scoped>
+<style lang="less">
 .gvt-login-skin {
   position: absolute;
   top: 0;
@@ -6,7 +6,6 @@
   right: 0;
   bottom: 0;
   z-index: 1;
-  // background-image: url("//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjKSAc6R_AAIzKAUmJ-U070.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
