@@ -321,9 +321,7 @@ export default {
     },
 
     initHref() {
-      this.href = window.location.href;
-      // OEM 定制
-      // this.href = window.location.pathname + window.location.hash;
+      this.href = window.location.pathname + window.location.hash;
     },
 
     isCurrentMenu(menu) {

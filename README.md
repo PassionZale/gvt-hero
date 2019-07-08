@@ -6,7 +6,7 @@
 
 ### 国际化
 
-- GVT UI Components Package @2.0.0 (OEM 定制)
+- GVT UI Components Package @2.0.1 (OEM 定制)
 
 - GVT UI Components Package @1.2.9 (登录语言选择)
 
