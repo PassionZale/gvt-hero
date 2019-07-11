@@ -25,8 +25,19 @@
 
   .gvt-sidebar-logo {
     height: 70px;
-    padding: 14px;
+    padding: 5px 20px;
     background-color: #3d4a5d;
+    position: relative;
+    img {
+      display: block;
+      max-height: 100%;
+      width: auto;
+      max-width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .gvt-menu {

@@ -16,9 +16,19 @@
   z-index: 3;
   position: absolute;
   top: 90px;
-  left: 80px;
-  width: 800px;
-  height: auto;
+  left: 90px;
+  width: 600px;
+  height: 600px;
+  img {
+    display: block;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .gvt-login-form {
@@ -56,30 +66,30 @@
   input.gvt-form-item-radio {
     vertical-align: middle;
     &:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #d1d3d1;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      top: -2px;
+      left: -1px;
+      position: relative;
+      background-color: #d1d3d1;
+      content: "";
+      display: inline-block;
+      visibility: visible;
+      border: 2px solid white;
     }
     &:checked:after {
-        width: 15px;
-        height: 15px;
-        border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #409fff;
-        content: '';
-        display: inline-block;
-        visibility: visible;
-        border: 2px solid white;
+      width: 15px;
+      height: 15px;
+      border-radius: 15px;
+      top: -2px;
+      left: -1px;
+      position: relative;
+      background-color: #409fff;
+      content: "";
+      display: inline-block;
+      visibility: visible;
+      border: 2px solid white;
     }
   }
   label.gvt-form-item-radio-label {
@@ -121,34 +131,44 @@
 
 <template>
   <div>
-    <div class="gvt-login-skin" :style="{background:  'url(' + $loginSkinSrc + ')'}"></div>
-    <img class="gvt-login-icon" :src="$loginIconSrc"/>
+    <div class="gvt-login-skin" :style="{backgroundImage:  'url(' + $loginSkinSrc + ')'}"></div>
+    <div class="gvt-login-icon">
+      <img :src="$loginIconSrc" />
+    </div>
     <div class="gvt-login-form gvt-form">
       <p class="gvt-login-title">{{ $heroT("loginForm.title") }}</p>
       <div class="gvt-form-item">
         <label class="gvt-form-item-label">{{ $heroT("loginForm.username") }}</label>
-        <br>
-        <input class="gvt-form-item-input" type="text" v-model="form.username" @keyup.enter="submit" />
+        <br />
+        <input
+          class="gvt-form-item-input"
+          type="text"
+          v-model="form.username"
+          @keyup.enter="submit"
+        />
       </div>
       <div class="gvt-form-item">
         <label class="gvt-form-item-label">{{ $heroT("loginForm.password") }}</label>
-        <br>
-        <input class="gvt-form-item-input" type="password" v-model="form.password" @keyup.enter="submit" />
+        <br />
+        <input
+          class="gvt-form-item-input"
+          type="password"
+          v-model="form.password"
+          @keyup.enter="submit"
+        />
       </div>
       <div class="gvt-form-item">
         <label class="gvt-form-item-radio-label">
-          <input class="gvt-form-item-radio" type="radio" value="zh-CN" v-model="lang">
+          <input class="gvt-form-item-radio" type="radio" value="zh-CN" v-model="lang" />
           简体中文
         </label>
         <label class="gvt-form-item-radio-label">
-          <input class="gvt-form-item-radio" type="radio" value="en-US" v-model="lang">
+          <input class="gvt-form-item-radio" type="radio" value="en-US" v-model="lang" />
           English
         </label>
       </div>
       <div class="gvt-form-item">
-        <button type="button" @click="submit">
-          {{ $heroT("loginForm.loginBtn") }}
-        </button>
+        <button type="button" @click="submit">{{ $heroT("loginForm.loginBtn") }}</button>
       </div>
       <slot></slot>
     </div>
@@ -159,7 +179,7 @@
 </template>
 
 <script>
-import i18nT from "../../mixins"
+import i18nT from "../../mixins";
 
 export default {
   name: "hero-login",
@@ -197,24 +217,30 @@ export default {
 
   computed: {
     $loginIconSrc() {
-      return this.loginUrl ? this.loginUrl : "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjMOAQHHgAAKHbYU_e_w612.png";
+      return this.loginUrl
+        ? this.loginUrl
+        : "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjMOAQHHgAAKHbYU_e_w612.png";
     },
     $loginSkinSrc() {
-      return this.loginBackUrl ? this.loginBackUrl : "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjKSAc6R_AAIzKAUmJ-U070.png";
+      return this.loginBackUrl
+        ? this.loginBackUrl
+        : "//47.75.105.17:22124/group1/M00/01/07/wKi5SlvrjKSAc6R_AAIzKAUmJ-U070.png";
     },
     $copyRight() {
       const currentYear = new Date().getFullYear();
-      return this.domainIcpNo ? this.domainIcpNo : `Copyright &copy; ${currentYear} Grand View Technology Pty Ltd`;
+      return this.domainIcpNo
+        ? this.domainIcpNo
+        : `Copyright &copy; ${currentYear} Grand View Technology Pty Ltd`;
     }
   },
 
   watch: {
     lang(val) {
-      this.$emit("update:locale", val)
+      this.$emit("update:locale", val);
     },
 
     locale(val) {
-      this.lang = val
+      this.lang = val;
     }
   },
 
